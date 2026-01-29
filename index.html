@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yaourt Hột Gà Gà - Hũ Sữa Chua</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --cream: #fff7eb;
+        --sun: #ffd166;
+        --amber: #f4b942;
+        --berry: #ff7aa2;
+        --cocoa: #6b3d2e;
+        --mint: #a2ffda;
+        --ink: #2b2622;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+        background: radial-gradient(circle at top, #fffdf9, var(--cream));
+        color: var(--ink);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      header {
+        position: relative;
+        padding: 48px 24px 120px;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .glow {
+        position: absolute;
+        inset: -40% -20% auto;
+        height: 60vh;
+        background: radial-gradient(circle, rgba(255, 209, 102, 0.55), transparent 70%);
+        filter: blur(10px);
+        animation: pulse 6s ease-in-out infinite;
+        z-index: 0;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.7;
+        }
+        50% {
+          transform: scale(1.08);
+          opacity: 1;
+        }
+      }
+
+      nav {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1100px;
+        margin: 0 auto 48px;
+      }
+
+      nav .logo {
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: var(--cocoa);
+      }
+
+      nav .cta {
+        background: var(--berry);
+        color: white;
+        border: none;
+        padding: 12px 22px;
+        border-radius: 999px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 10px 20px rgba(255, 122, 162, 0.4);
+        transition: transform 0.2s ease;
+      }
+
+      nav .cta:hover {
+        transform: translateY(-2px) scale(1.01);
+      }
+
+      .hero {
+        position: relative;
+        z-index: 1;
+        max-width: 980px;
+        margin: 0 auto;
+        display: grid;
+        gap: 32px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        align-items: center;
+      }
+
+      .hero h1 {
+        font-size: clamp(32px, 4vw, 52px);
+        line-height: 1.1;
+        color: var(--cocoa);
+      }
+
+      .hero p {
+        margin: 18px 0 28px;
+        font-size: 18px;
+        color: #4b3c33;
+      }
+
+      .hero .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .hero .hero-actions a {
+        text-decoration: none;
+        padding: 12px 22px;
+        border-radius: 999px;
+        font-weight: 600;
+      }
+
+      .hero .hero-actions .primary {
+        background: var(--sun);
+        color: #5a3a0f;
+        box-shadow: 0 12px 20px rgba(244, 185, 66, 0.35);
+      }
+
+      .hero .hero-actions .ghost {
+        border: 2px solid var(--amber);
+        color: var(--amber);
+      }
+
+      .jar {
+        position: relative;
+        width: min(360px, 80vw);
+        aspect-ratio: 3 / 4;
+        margin: 0 auto;
+        background: linear-gradient(180deg, #fff, #ffeec7 40%, #ffd98d);
+        border-radius: 26px 26px 40px 40px;
+        box-shadow: 0 24px 48px rgba(112, 74, 26, 0.25);
+        overflow: hidden;
+        transform: rotate(-2deg);
+      }
+
+      .jar::before {
+        content: "";
+        position: absolute;
+        inset: 12px 20px auto;
+        height: 36px;
+        background: linear-gradient(90deg, var(--berry), #ffb4c8);
+        border-radius: 30px;
+        box-shadow: 0 10px 30px rgba(255, 122, 162, 0.4);
+      }
+
+      .jar .layer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        border-radius: 50%;
+        filter: blur(0.2px);
+      }
+
+      .layer.one {
+        top: 40%;
+        height: 38%;
+        background: linear-gradient(180deg, #fff9e2, #ffe08f);
+      }
+
+      .layer.two {
+        top: 56%;
+        height: 34%;
+        background: radial-gradient(circle at top, #ffd166, #f9b63e 60%);
+      }
+
+      .layer.three {
+        top: 24%;
+        height: 40%;
+        background: radial-gradient(circle at 40% 20%, #fff9f1, #ffdca5 70%);
+        opacity: 0.9;
+      }
+
+      .sparkles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .sparkles span {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+        opacity: 0.7;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .sparkles span:nth-child(1) {
+        top: 15%;
+        left: 18%;
+        animation-delay: 0s;
+      }
+
+      .sparkles span:nth-child(2) {
+        top: 32%;
+        right: 12%;
+        animation-delay: 1s;
+        width: 10px;
+        height: 10px;
+      }
+
+      .sparkles span:nth-child(3) {
+        bottom: 20%;
+        left: 30%;
+        animation-delay: 2s;
+      }
+
+      .sparkles span:nth-child(4) {
+        bottom: 14%;
+        right: 26%;
+        animation-delay: 3s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-16px) scale(1.2);
+        }
+      }
+
+      section {
+        padding: 60px 24px;
+      }
+
+      .features {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        gap: 22px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .card {
+        background: white;
+        padding: 22px;
+        border-radius: 18px;
+        box-shadow: 0 12px 30px rgba(76, 54, 39, 0.08);
+        border: 1px solid rgba(255, 209, 102, 0.25);
+      }
+
+      .card h3 {
+        margin-bottom: 10px;
+        color: var(--cocoa);
+      }
+
+      .card p {
+        color: #5a4a40;
+        font-size: 15px;
+      }
+
+      .taste-strip {
+        background: linear-gradient(90deg, rgba(255, 209, 102, 0.35), rgba(255, 122, 162, 0.25));
+        border-radius: 999px;
+        padding: 12px 22px;
+        display: inline-flex;
+        gap: 12px;
+        align-items: center;
+        font-weight: 600;
+        color: #6b3d2e;
+        margin-top: 20px;
+      }
+
+      .gallery {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .photo {
+        height: 220px;
+        border-radius: 20px;
+        background: radial-gradient(circle at top, #fff6d5, #ffd166 65%, #f3a73b);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 12px 26px rgba(118, 82, 32, 0.2);
+      }
+
+      .photo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.8), transparent 60%);
+        opacity: 0.8;
+      }
+
+      .photo span {
+        position: absolute;
+        bottom: 18px;
+        left: 18px;
+        color: #5a3a0f;
+        font-weight: 600;
+      }
+
+      .feedback {
+        max-width: 960px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 26px;
+        padding: 36px;
+        box-shadow: 0 18px 36px rgba(108, 76, 37, 0.12);
+        border: 1px solid rgba(255, 209, 102, 0.25);
+      }
+
+      .feedback h2 {
+        margin-bottom: 12px;
+        color: var(--cocoa);
+      }
+
+      form {
+        display: grid;
+        gap: 16px;
+        margin-top: 20px;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(107, 61, 46, 0.2);
+        font-size: 15px;
+        font-family: inherit;
+      }
+
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .form-row {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .submit {
+        background: var(--cocoa);
+        color: white;
+        border: none;
+        padding: 12px 22px;
+        border-radius: 999px;
+        font-weight: 600;
+        cursor: pointer;
+        width: fit-content;
+        box-shadow: 0 12px 20px rgba(107, 61, 46, 0.25);
+      }
+
+      footer {
+        text-align: center;
+        padding: 32px 16px 48px;
+        color: #7a6a5b;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="glow"></div>
+      <nav>
+        <div class="logo">Yaourt Hột Gà Gà</div>
+        <button class="cta" type="button" onclick="document.getElementById('feedback').scrollIntoView({behavior:'smooth'})">
+          Gửi feedback
+        </button>
+      </nav>
+
+      <div class="hero">
+        <div>
+          <h1>Hũ sữa chua yaourt hột gà gà mịn thơm, bùng vị!</h1>
+          <p>
+            Vị béo thanh từ sữa tươi, điểm hột gà gà vàng óng, thơm nhẹ và sánh mịn. Món tráng miệng khiến
+            bạn vừa mở nắp là muốn thử ngay.
+          </p>
+          <div class="hero-actions">
+            <a class="primary" href="#gallery">Xem hình ảnh</a>
+            <a class="ghost" href="#feedback">Chia sẻ cảm nhận</a>
+          </div>
+          <div class="taste-strip">Kem mịn + Hột gà gà + Ngọt dịu</div>
+        </div>
+
+        <div class="jar" aria-hidden="true">
+          <div class="layer three"></div>
+          <div class="layer one"></div>
+          <div class="layer two"></div>
+          <div class="sparkles">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="features">
+        <div class="card">
+          <h3>Mịn màng bắt mắt</h3>
+          <p>Hiệu ứng hình ảnh rực rỡ giúp hũ yaourt nổi bật, nhìn là muốn thử ngay.</p>
+        </div>
+        <div class="card">
+          <h3>Hột gà gà vàng óng</h3>
+          <p>Điểm nhấn giòn nhẹ, thơm bùi, cân bằng vị ngọt dịu và béo mượt.</p>
+        </div>
+        <div class="card">
+          <h3>Thanh nhẹ dễ ăn</h3>
+          <p>Không ngọt gắt, phù hợp cho bữa xế chiều hoặc tiệc nhẹ cuối tuần.</p>
+        </div>
+        <div class="card">
+          <h3>Đóng hũ tiện lợi</h3>
+          <p>Giữ lạnh dễ dàng, mang đi nhanh, thưởng thức ngay khi cần năng lượng.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="gallery">
+        <div class="photo"><span>Bề mặt mịn như kem</span></div>
+        <div class="photo"><span>Hột gà gà vàng óng</span></div>
+        <div class="photo"><span>Ánh sáng lấp lánh</span></div>
+        <div class="photo"><span>Sắc vàng ngọt dịu</span></div>
+      </div>
+    </section>
+
+    <section id="feedback">
+      <div class="feedback">
+        <h2>Feedback của bạn</h2>
+        <p>Chia sẻ cảm nhận để chúng tôi làm hũ yaourt ngon hơn mỗi ngày.</p>
+        <form>
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Tên của bạn" required />
+            <input type="email" name="email" placeholder="Email" required />
+          </div>
+          <div class="form-row">
+            <select name="rating" required>
+              <option value="">Đánh giá tổng quan</option>
+              <option>5 - Tuyệt vời</option>
+              <option>4 - Rất ngon</option>
+              <option>3 - Ổn áp</option>
+              <option>2 - Cần cải thiện</option>
+              <option>1 - Chưa hài lòng</option>
+            </select>
+            <input type="text" name="favorite" placeholder="Điều bạn thích nhất" />
+          </div>
+          <textarea name="message" placeholder="Viết feedback của bạn..." required></textarea>
+          <button class="submit" type="submit">Gửi phản hồi</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>Yaourt Hột Gà Gà - Cảm ơn bạn đã ghé thăm!</footer>
+  </body>
+</html>
+
