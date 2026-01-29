@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Yaourt Hột Gà Gà - Hũ Sữa Chua</title>
+    <title>Yaourt Hột Gà - Hũ Sữa Chua</title>
     <style>
       :root {
         color-scheme: light;
@@ -67,6 +67,18 @@
         align-items: center;
         max-width: 1100px;
         margin: 0 auto 48px;
+        animation: slideDown 0.8s ease-out;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       nav .logo {
@@ -86,11 +98,12 @@
         font-weight: 600;
         cursor: pointer;
         box-shadow: 0 10px 20px rgba(255, 122, 162, 0.4);
-        transition: transform 0.2s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
 
       nav .cta:hover {
-        transform: translateY(-2px) scale(1.01);
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 14px 28px rgba(255, 122, 162, 0.5);
       }
 
       .hero {
@@ -102,6 +115,21 @@
         gap: 32px;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         align-items: center;
+      }
+
+      .hero > div:first-child {
+        animation: fadeInLeft 1s ease-out;
+      }
+
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
       }
 
       .hero h1 {
@@ -127,6 +155,7 @@
         padding: 12px 22px;
         border-radius: 999px;
         font-weight: 600;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
 
       .hero .hero-actions .primary {
@@ -135,9 +164,21 @@
         box-shadow: 0 12px 20px rgba(244, 185, 66, 0.35);
       }
 
+      .hero .hero-actions .primary:hover {
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 16px 28px rgba(244, 185, 66, 0.5);
+      }
+
       .hero .hero-actions .ghost {
         border: 2px solid var(--amber);
         color: var(--amber);
+        transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+      }
+
+      .hero .hero-actions .ghost:hover {
+        background: var(--amber);
+        color: white;
+        transform: translateY(-4px);
       }
 
       .jar {
@@ -150,6 +191,33 @@
         box-shadow: 0 24px 48px rgba(112, 74, 26, 0.25);
         overflow: hidden;
         transform: rotate(-2deg);
+        animation: floatJar 4s ease-in-out infinite, fadeInRight 1s ease-out;
+        transition: transform 0.4s ease;
+      }
+
+      .jar:hover {
+        transform: rotate(0deg) scale(1.05);
+        box-shadow: 0 32px 64px rgba(112, 74, 26, 0.35);
+      }
+
+      @keyframes floatJar {
+        0%, 100% {
+          transform: rotate(-2deg) translateY(0);
+        }
+        50% {
+          transform: rotate(-2deg) translateY(-12px);
+        }
+      }
+
+      @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px) rotate(-2deg);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0) rotate(-2deg);
+        }
       }
 
       .jar::before {
@@ -160,6 +228,16 @@
         background: linear-gradient(90deg, var(--berry), #ffb4c8);
         border-radius: 30px;
         box-shadow: 0 10px 30px rgba(255, 122, 162, 0.4);
+        animation: shimmer 3s ease-in-out infinite;
+      }
+
+      @keyframes shimmer {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
       }
 
       .jar .layer {
@@ -168,18 +246,25 @@
         right: 0;
         border-radius: 50%;
         filter: blur(0.2px);
+        transition: transform 0.4s ease;
+      }
+
+      .jar:hover .layer {
+        transform: scale(1.02);
       }
 
       .layer.one {
         top: 40%;
         height: 38%;
         background: linear-gradient(180deg, #fff9e2, #ffe08f);
+        animation: layerWave 5s ease-in-out infinite;
       }
 
       .layer.two {
         top: 56%;
         height: 34%;
         background: radial-gradient(circle at top, #ffd166, #f9b63e 60%);
+        animation: layerWave 5s ease-in-out infinite 0.5s;
       }
 
       .layer.three {
@@ -187,6 +272,16 @@
         height: 40%;
         background: radial-gradient(circle at 40% 20%, #fff9f1, #ffdca5 70%);
         opacity: 0.9;
+        animation: layerWave 5s ease-in-out infinite 1s;
+      }
+
+      @keyframes layerWave {
+        0%, 100% {
+          transform: scaleX(1);
+        }
+        50% {
+          transform: scaleX(1.02);
+        }
       }
 
       .sparkles {
@@ -231,13 +326,29 @@
         animation-delay: 3s;
       }
 
+      .sparkles span:nth-child(5) {
+        top: 50%;
+        left: 50%;
+        animation-delay: 1.5s;
+        width: 6px;
+        height: 6px;
+      }
+
+      .sparkles span:nth-child(6) {
+        top: 70%;
+        right: 35%;
+        animation-delay: 2.5s;
+      }
+
       @keyframes float {
         0%,
         100% {
           transform: translateY(0) scale(1);
+          opacity: 0.7;
         }
         50% {
-          transform: translateY(-16px) scale(1.2);
+          transform: translateY(-16px) scale(1.3);
+          opacity: 1;
         }
       }
 
@@ -259,11 +370,37 @@
         border-radius: 18px;
         box-shadow: 0 12px 30px rgba(76, 54, 39, 0.08);
         border: 1px solid rgba(255, 209, 102, 0.25);
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.6s ease-out forwards;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .card:nth-child(1) { animation-delay: 0.1s; }
+      .card:nth-child(2) { animation-delay: 0.2s; }
+      .card:nth-child(3) { animation-delay: 0.3s; }
+      .card:nth-child(4) { animation-delay: 0.4s; }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(76, 54, 39, 0.15);
       }
 
       .card h3 {
         margin-bottom: 10px;
         color: var(--cocoa);
+        transition: color 0.3s ease;
+      }
+
+      .card:hover h3 {
+        color: var(--berry);
       }
 
       .card p {
@@ -281,6 +418,21 @@
         font-weight: 600;
         color: #6b3d2e;
         margin-top: 20px;
+        animation: bounceIn 1s ease-out 0.5s both;
+      }
+
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        60% {
+          transform: scale(1.1);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
 
       .gallery {
@@ -298,6 +450,43 @@
         position: relative;
         overflow: hidden;
         box-shadow: 0 12px 26px rgba(118, 82, 32, 0.2);
+        cursor: pointer;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        animation: scaleIn 0.6s ease-out backwards;
+      }
+
+      .photo:nth-child(1) { animation-delay: 0.1s; }
+      .photo:nth-child(2) { animation-delay: 0.2s; }
+      .photo:nth-child(3) { animation-delay: 0.3s; }
+      .photo:nth-child(4) { animation-delay: 0.4s; }
+
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .photo:hover {
+        transform: scale(1.05) rotate(2deg);
+        box-shadow: 0 20px 40px rgba(118, 82, 32, 0.35);
+      }
+
+      .photo::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.4) 50%, transparent 60%);
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+      }
+
+      .photo:hover::before {
+        transform: translateX(100%);
       }
 
       .photo::after {
@@ -314,6 +503,12 @@
         left: 18px;
         color: #5a3a0f;
         font-weight: 600;
+        z-index: 2;
+        transition: transform 0.3s ease;
+      }
+
+      .photo:hover span {
+        transform: translateX(5px);
       }
 
       .feedback {
@@ -324,6 +519,7 @@
         padding: 36px;
         box-shadow: 0 18px 36px rgba(108, 76, 37, 0.12);
         border: 1px solid rgba(255, 209, 102, 0.25);
+        animation: fadeInUp 0.8s ease-out;
       }
 
       .feedback h2 {
@@ -346,6 +542,16 @@
         border: 1px solid rgba(107, 61, 46, 0.2);
         font-size: 15px;
         font-family: inherit;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: var(--amber);
+        box-shadow: 0 0 0 4px rgba(244, 185, 66, 0.2);
+        transform: scale(1.01);
       }
 
       textarea {
@@ -369,20 +575,106 @@
         cursor: pointer;
         width: fit-content;
         box-shadow: 0 12px 20px rgba(107, 61, 46, 0.25);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .submit::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
+        transform: translateX(-100%);
+        transition: transform 0.5s ease;
+      }
+
+      .submit:hover::before {
+        transform: translateX(100%);
+      }
+
+      .submit:hover {
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 16px 32px rgba(107, 61, 46, 0.35);
+        background: #7d4a3a;
       }
 
       footer {
         text-align: center;
         padding: 32px 16px 48px;
         color: #7a6a5b;
+        animation: fadeIn 1s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      /* Floating bubbles background */
+      .bubbles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .bubble {
+        position: absolute;
+        bottom: -100px;
+        background: radial-gradient(circle at 30% 30%, rgba(255,209,102,0.3), rgba(255,122,162,0.15));
+        border-radius: 50%;
+        animation: rise linear infinite;
+      }
+
+      .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; animation-duration: 12s; animation-delay: 0s; }
+      .bubble:nth-child(2) { width: 20px; height: 20px; left: 20%; animation-duration: 10s; animation-delay: 1s; }
+      .bubble:nth-child(3) { width: 50px; height: 50px; left: 35%; animation-duration: 14s; animation-delay: 2s; }
+      .bubble:nth-child(4) { width: 30px; height: 30px; left: 50%; animation-duration: 11s; animation-delay: 0.5s; }
+      .bubble:nth-child(5) { width: 35px; height: 35px; left: 65%; animation-duration: 13s; animation-delay: 3s; }
+      .bubble:nth-child(6) { width: 25px; height: 25px; left: 75%; animation-duration: 9s; animation-delay: 1.5s; }
+      .bubble:nth-child(7) { width: 45px; height: 45px; left: 85%; animation-duration: 15s; animation-delay: 2.5s; }
+      .bubble:nth-child(8) { width: 15px; height: 15px; left: 90%; animation-duration: 8s; animation-delay: 4s; }
+
+      @keyframes rise {
+        0% {
+          bottom: -100px;
+          transform: translateX(0) scale(1);
+          opacity: 0.6;
+        }
+        50% {
+          transform: translateX(30px) scale(1.1);
+          opacity: 0.8;
+        }
+        100% {
+          bottom: 110vh;
+          transform: translateX(-20px) scale(0.9);
+          opacity: 0;
+        }
       }
     </style>
   </head>
   <body>
+    <!-- Floating bubbles background -->
+    <div class="bubbles">
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+    </div>
+
     <header>
       <div class="glow"></div>
       <nav>
-        <div class="logo">Yaourt Hột Gà Gà</div>
+        <div class="logo">Yaourt Hột Gà</div>
         <button class="cta" type="button" onclick="document.getElementById('feedback').scrollIntoView({behavior:'smooth'})">
           Gửi feedback
         </button>
@@ -390,16 +682,16 @@
 
       <div class="hero">
         <div>
-          <h1>Hũ sữa chua yaourt hột gà gà mịn thơm, bùng vị!</h1>
+          <h1>Hũ sữa chua yaourt hột gà mịn thơm, bùng vị!</h1>
           <p>
-            Vị béo thanh từ sữa tươi, điểm hột gà gà vàng óng, thơm nhẹ và sánh mịn. Món tráng miệng khiến
+            Vị béo thanh từ sữa tươi, điểm hột gà vàng óng, thơm nhẹ và sánh mịn. Món tráng miệng khiến
             bạn vừa mở nắp là muốn thử ngay.
           </p>
           <div class="hero-actions">
             <a class="primary" href="#gallery">Xem hình ảnh</a>
             <a class="ghost" href="#feedback">Chia sẻ cảm nhận</a>
           </div>
-          <div class="taste-strip">Kem mịn + Hột gà gà + Ngọt dịu</div>
+          <div class="taste-strip">Kem mịn + Hột gà + Ngọt dịu</div>
         </div>
 
         <div class="jar" aria-hidden="true">
@@ -407,6 +699,8 @@
           <div class="layer one"></div>
           <div class="layer two"></div>
           <div class="sparkles">
+            <span></span>
+            <span></span>
             <span></span>
             <span></span>
             <span></span>
@@ -423,7 +717,7 @@
           <p>Hiệu ứng hình ảnh rực rỡ giúp hũ yaourt nổi bật, nhìn là muốn thử ngay.</p>
         </div>
         <div class="card">
-          <h3>Hột gà gà vàng óng</h3>
+          <h3>Hột gà vàng óng</h3>
           <p>Điểm nhấn giòn nhẹ, thơm bùi, cân bằng vị ngọt dịu và béo mượt.</p>
         </div>
         <div class="card">
@@ -440,7 +734,7 @@
     <section id="gallery">
       <div class="gallery">
         <div class="photo"><span>Bề mặt mịn như kem</span></div>
-        <div class="photo"><span>Hột gà gà vàng óng</span></div>
+        <div class="photo"><span>Hột gà vàng óng</span></div>
         <div class="photo"><span>Ánh sáng lấp lánh</span></div>
         <div class="photo"><span>Sắc vàng ngọt dịu</span></div>
       </div>
@@ -472,7 +766,6 @@
       </div>
     </section>
 
-    <footer>Yaourt Hột Gà Gà - Cảm ơn bạn đã ghé thăm!</footer>
+    <footer>Yaourt Hột Gà - Cảm ơn bạn đã ghé thăm!</footer>
   </body>
 </html>
-
