@@ -744,27 +744,59 @@
       <div class="feedback">
         <h2>Feedback của bạn</h2>
         <p>Chia sẻ cảm nhận để chúng tôi làm hũ yaourt ngon hơn mỗi ngày.</p>
-        <form>
-          <div class="form-row">
-            <input type="text" name="name" placeholder="Tên của bạn" required />
-            <input type="email" name="email" placeholder="Email" required />
-          </div>
-          <div class="form-row">
-            <select name="rating" required>
-              <option value="">Đánh giá tổng quan</option>
-              <option>5 - Tuyệt vời</option>
-              <option>4 - Rất ngon</option>
-              <option>3 - Ổn áp</option>
-              <option>2 - Cần cải thiện</option>
-              <option>1 - Chưa hài lòng</option>
-            </select>
-            <input type="text" name="favorite" placeholder="Điều bạn thích nhất" />
-          </div>
+        <form id="feedbackForm">
+          <input type="text" name="name" placeholder="Tên của bạn" required />
+          <select name="rating" required>
+            <option value="">Đánh giá tổng quan</option>
+            <option value="5 - Tuyệt vời">5 - Tuyệt vời</option>
+            <option value="4 - Rất ngon">4 - Rất ngon</option>
+            <option value="3 - Ổn áp">3 - Ổn áp</option>
+            <option value="2 - Cần cải thiện">2 - Cần cải thiện</option>
+            <option value="1 - Chưa hài lòng">1 - Chưa hài lòng</option>
+          </select>
           <textarea name="message" placeholder="Viết feedback của bạn..." required></textarea>
           <button class="submit" type="submit">Gửi phản hồi</button>
         </form>
+        <div id="successMsg" style="display:none; margin-top:20px; padding:16px; background:#d4edda; color:#155724; border-radius:12px; text-align:center; font-weight:600;">
+          Cảm ơn bạn đã gửi feedback!
+        </div>
       </div>
     </section>
+
+    <script>
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwNURw1ZdICXcl8w-B05ZgVxDwz0juA5QzJI0fS5wneFINYsXrZv7p2EZQP3_WizuGh/exec";
+      
+      document.getElementById("feedbackForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const submitBtn = form.querySelector(".submit");
+        submitBtn.textContent = "Đang gửi...";
+        submitBtn.disabled = true;
+        
+        const data = {
+          name: form.name.value,
+          rating: form.rating.value,
+          message: form.message.value
+        };
+        
+        try {
+          await fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+          });
+          
+          form.style.display = "none";
+          document.getElementById("successMsg").style.display = "block";
+        } catch (error) {
+          alert("Có lỗi xảy ra, vui lòng thử lại!");
+          submitBtn.textContent = "Gửi phản hồi";
+          submitBtn.disabled = false;
+        }
+      });
+    </script>
 
     <footer>Yaourt Hột Gà - Cảm ơn bạn đã ghé thăm!</footer>
   </body>
